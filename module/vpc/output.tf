@@ -16,3 +16,12 @@
 # output "docker" {
 #   value = module.docker.docker_server_ip
 # }
+output "key-name" {
+  value = aws_key_pair.keypair.key_name
+}
+output "key-id" {
+  value = aws_key_pair.keypair.id
+}
+output "private-key" {
+  value = tls_private_key.keypair-1.private_key_pem
+}
