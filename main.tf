@@ -38,3 +38,20 @@ module "vpc" {
   RT_cidr_2              = ["10.0.3.0/24", "10.0.4.0/24"]
   tag-MySQL-SG           = "${local.name}-MySQL-SG"
 }
+module  "Bastion" {
+  source                      = "./module/bastion"
+  ami                         = "ami-0fcf52bcf5db7b003"
+  instance_type               = "t2.medium"
+  subnet_id                   = module.vpc.Public_subnet_1
+  associate_public_ip_address = true
+  vpc_security_group_ids      = module.vpc.Bastion_Ansible_SG
+  key_name                    = module.vpc.key_name
+}
+module "jenkins" {
+  source = "./module/jenkins"
+  ami                         = "ami-0fcf52bcf5db7b003"
+  instance_type               = "t2.medium"
+  subnet_id                   = module.vpc.private_subnet_2
+  vpc_security_group_ids      = module.vpc.Jenkins_SG
+  key_name                    = module.vpc.key-name
+}
