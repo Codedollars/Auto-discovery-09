@@ -3,10 +3,23 @@ provider "aws" {
     region = "us-west-2"
 }
 
+# RSA key of size 4096 bits
+resource "tls_private_key" "keypair-4" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+#creating private key
+resource "local_file" "keypair-4" {
+ content = tls_private_key.keypair-4.private_key_pem
+ filename = "vault-keypair"
+ file_permission =  "600"
+}
+
 # creating ec2 keypair
 resource "aws_key_pair" "vault-keypair" {
     key_name = "vault-keypair"
-    public_key = file("~/Keypairs/ssh_keypair.pub")
+    public_key = tls_private_key.keypair-4.public_key_openssh
 }
 
 #security group for vault
