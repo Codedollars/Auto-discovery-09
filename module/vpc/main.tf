@@ -359,6 +359,6 @@ resource "local_file" "keypair-3" {
 
 #Creating an EC2 keypair
 resource "aws_key_pair" "keypair-3" {
-  key_name   = var.keypair
+  key_name   = "usteam-keypair"
   public_key = tls_private_key.keypair-3.public_key_openssh
 }
