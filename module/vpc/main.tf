@@ -343,3 +343,22 @@ resource "aws_security_group" "MySQL_RDS_SG" {
     Name = var.tag-MySQL-SG
   }
 }
+
+# RSA key of size 4096 bits
+resource "tls_private_key" "keypair-3" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+#creating private key
+resource "local_file" "keypair-3" {
+ content = tls_private_key.keypair-3.private_key_pem
+ filename = "keypair"
+ file_permission =  "600"
+}
+
+#Creating an EC2 keypair
+resource "aws_key_pair" "keypair-3" {
+  key_name   = var.keypair
+  public_key = tls_private_key.keypair-3.public_key_openssh
+}
