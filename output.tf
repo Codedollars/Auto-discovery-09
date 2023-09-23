@@ -1,7 +1,5 @@
 output "jenkins-ip" {
-  value = aws_instance.us-team-jenkins.private_ip
+  value = module.jenkins.jenkins-ip
 }
 
-output "jenkins server" {
-  value = aws_instance.us-team-jenkins.id
-}
+

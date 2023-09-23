@@ -29,7 +29,7 @@ EOT
 
 sudo systemctl restart docker 
 "install newrelic agent 
-curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY="${newrelic-license-key}" NEW_RELIC_ACCOUNT_ID="${newrelic-acct-id}" /usr/local/bin/newrelic install -y
+curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY="${var.newrelic-license-key}" NEW_RELIC_ACCOUNT_ID="${var.newrelic-acct-id}" /usr/local/bin/newrelic install -y
 
 sudo hostnamectl set-hostname Jenkins
 EOF
