@@ -25,3 +25,16 @@ output "key-id" {
 output "private-key" {
   value = tls_private_key.keypair-1.private_key_pem
 }
+output "Public_subnet_1" {
+  value = aws_subnet.Public_subnet_1.id
+}
+
+output "Bastion_Ansible_SG" {
+  value = aws_security_group.Bastion_Ansible_SG.id
+}
+output "Private_subnet_2" {
+  value = aws_subnet.private_subnet_2.id
+}
+output "Jenkins_SG" {
+  value = aws_security_group.Jenkins_SG.id
+}
